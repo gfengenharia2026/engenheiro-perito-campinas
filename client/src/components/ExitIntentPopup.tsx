@@ -5,7 +5,7 @@ export default function ExitIntentPopup() {
   const [isVisible, setIsVisible] = useState(false);
   const [hasShown, setHasShown] = useState(false);
 
-  const whatsappUrl = 'https://wa.me/5519999999999?text=Olá%20Eng.%20Gustavo,%20gostaria%20de%20agendar%20uma%20vistoria%20técnica.';
+  const whatsappUrl = 'https://wa.me/5519989045748?text=Olá%20Eng.%20Gustavo,%20gostaria%20de%20agendar%20uma%20vistoria%20técnica.';
 
   useEffect(() => {
     const handleMouseLeave = (e: MouseEvent) => {

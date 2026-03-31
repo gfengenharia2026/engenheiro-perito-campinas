@@ -1,8 +1,11 @@
-import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { MessageCircle, CheckCircle2, Award, Briefcase, Users, FileText, Home as HomeIcon, Zap, AlertCircle, Scale, Building2, TrendingUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Header from '@/components/Header';
+import CalendlyWidget from '@/components/CalendlyWidget';
+import PriceCalculator from '@/components/PriceCalculator';
+import CrispChat from '@/components/CrispChat';
 
 const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/hero-engenheiro-YD5NWNMKezgrrJhjC8vjux.webp';
 const SERVICOS_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/servicos-background-cFUjx8bDgh9m4NPLSfybPN.webp';
@@ -31,10 +34,10 @@ function CounterNumber({ target, duration = 2000 }: { target: number; duration?:
 
   return <span>{count.toLocaleString('pt-BR')}</span>;
 }
-
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
+      <CrispChat />
       <Header />
 
       {/* HERO SECTION */}
@@ -397,6 +400,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* CALCULADORA DE PREÇOS */}
+      <PriceCalculator />
+
+      {/* AGENDAMENTO CALENDLY */}
+      <CalendlyWidget />
 
       {/* BLOG */}
       <section id="blog" className="py-20 bg-white">
