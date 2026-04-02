@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { MessageCircle, CheckCircle2, Award, Briefcase, Users, FileText, Home as HomeIcon, Zap, AlertCircle, Scale, Building2, TrendingUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -9,13 +8,12 @@ import CrispChat from '@/components/CrispChat';
 import { useAuth } from '@/_core/hooks/useAuth';
 import { trpc } from '@/lib/trpc';
 import LeadForm from '@/components/LeadForm';
+import { WHATSAPP_URL, PHONE_DISPLAY, PROFESSIONAL_NAME, CREA_NUMBER, YEARS_EXPERIENCE, TOTAL_REPORTS, REGION, RATING, REVIEW_COUNT, TOTAL_CLIENTS } from '@/lib/constants';
 
 const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/hero-engenheiro-YD5NWNMKezgrrJhjC8vjux.webp';
 const SERVICOS_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/servicos-background-cFUjx8bDgh9m4NPLSfybPN.webp';
 const AUTORIDADE_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/autoridade-background-jPPZs4gbkdNba3Ypb6yR9U.webp';
 const PROBLEMAS_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/problemas-background-hUw6tV8zoisycwdh2NchXw.webp';
-
-const whatsappUrl = 'https://wa.me/5519989045748?text=Olá%20Eng.%20Gustavo,%20gostaria%20de%20agendar%20uma%20vistoria%20técnica.';
 
 function CounterNumber({ target, duration = 2000 }: { target: number; duration?: number }) {
   const [count, setCount] = useState(0);
@@ -37,6 +35,7 @@ function CounterNumber({ target, duration = 2000 }: { target: number; duration?:
 
   return <span>{count.toLocaleString('pt-BR')}</span>;
 }
+
 export default function HomePage() {
   const { user, isAuthenticated } = useAuth();
   
@@ -46,25 +45,26 @@ export default function HomePage() {
       <Header />
 
       {/* HERO SECTION */}
-      <section id="inicio" className="pt-20 pb-20 relative overflow-hidden">
+      <section id="inicio" className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img src={HERO_BG} alt="Perícias de Engenharia" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
-        <div className="container max-w-6xl mx-auto px-4 relative z-10 flex items-center min-h-[600px]">
-          <div className="max-w-2xl">
+
+        <div className="container max-w-6xl mx-auto px-4 relative z-10">
+          <div className="max-w-3xl">
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
               Perícias e Vistorias Técnicas de Engenharia em Campinas e Região
             </h1>
             <p className="text-xl text-gray-100 mb-8 leading-relaxed">
-              Engenheiro civil especialista em laudos técnicos, perícias judiciais e vistorias imobiliárias. Mais de 15.000 laudos realizados com precisão e confiabilidade.
+              Engenheiro civil especialista em laudos técnicos, perícias judiciais e vistorias imobiliárias. Mais de {TOTAL_REPORTS.toLocaleString('pt-BR')} laudos realizados com precisão e confiabilidade.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="bg-orange-400 hover:bg-orange-500 text-white px-8 py-3 rounded font-bold text-lg transition flex items-center justify-center gap-2">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-orange-400 hover:bg-orange-500 text-white px-8 py-4 rounded-lg font-bold text-lg transition transform hover:scale-105">
                 <MessageCircle size={20} />
                 Falar no WhatsApp
               </a>
-              <button onClick={() => document.getElementById('servicos')?.scrollIntoView({ behavior: 'smooth' })} className="bg-white hover:bg-gray-100 text-blue-900 px-8 py-3 rounded font-bold text-lg transition">
+              <button onClick={() => document.getElementById('calendly')?.scrollIntoView({ behavior: 'smooth' })} className="inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-blue-900 px-8 py-4 rounded-lg font-bold text-lg transition">
                 Agendar Vistoria
               </button>
             </div>
@@ -72,177 +72,165 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* AUTORIDADE SECTION */}
-      <section className="py-20 bg-gray-50">
+      {/* PROVA SOCIAL */}
+      <section className="bg-blue-900 text-white py-6">
         <div className="container max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-5xl font-bold text-blue-900 mb-2">
-                <CounterNumber target={15000} />+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-4xl font-bold mb-2">
+                <CounterNumber target={RATING} duration={2000} />
               </div>
-              <p className="text-gray-600 font-medium">Laudos Realizados</p>
+              <p className="text-sm">⭐ {REVIEW_COUNT}+ avaliações</p>
             </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold text-blue-900 mb-2">
-                <CounterNumber target={7} />
+            <div>
+              <div className="text-4xl font-bold mb-2">
+                <CounterNumber target={TOTAL_CLIENTS} duration={2500} />+
               </div>
-              <p className="text-gray-600 font-medium">Anos de Experiência</p>
+              <p className="text-sm">Clientes atendidos com sucesso</p>
             </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold text-blue-900 mb-2">
-                <CounterNumber target={3} />
+            <div>
+              <div className="text-4xl font-bold mb-2">
+                <CounterNumber target={YEARS_EXPERIENCE} duration={1500} />
               </div>
-              <p className="text-gray-600 font-medium">Tribunais (TJSP, TRT-15, TRF-3)</p>
+              <p className="text-sm">Anos de experiência</p>
             </div>
-            <div className="text-center">
-              <div className="text-5xl font-bold text-blue-900 mb-2">CREA</div>
-              <p className="text-gray-600 font-medium">5071007855</p>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-300 mt-12 pt-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="flex gap-4">
-                <Award className="text-blue-900 flex-shrink-0" size={32} />
-                <div>
-                  <h3 className="font-bold text-lg text-blue-900 mb-2">Engenheiro Registrado no CREA</h3>
-                  <p className="text-gray-600">Atuação em perícias judiciais e extrajudiciais nos tribunais TJSP, TRT-15 e TRF-3.</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <FileText className="text-blue-900 flex-shrink-0" size={32} />
-                <div>
-                  <h3 className="font-bold text-lg text-blue-900 mb-2">Laudos Técnicos Precisos</h3>
-                  <p className="text-gray-600">Mais de 15.000 laudos técnicos realizados com rigor metodológico e confiabilidade jurídica.</p>
-                </div>
-              </div>
-              <div className="flex gap-4">
-                <CheckCircle2 className="text-blue-900 flex-shrink-0" size={32} />
-                <div>
-                  <h3 className="font-bold text-lg text-blue-900 mb-2">Atendimento Regional</h3>
-                  <p className="text-gray-600">Campinas, Hortolândia, Sumaré, Paulínia, Valinhos e região com disponibilidade de agenda.</p>
-                </div>
-              </div>
+            <div>
+              <div className="text-4xl font-bold mb-2">Resposta em 2h</div>
+              <p className="text-sm">Garantido via WhatsApp</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SERVIÇOS SECTION */}
+      {/* AUTORIDADE */}
+      <section id="autoridade" className="py-20 bg-gray-50">
+        <div className="container max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Por Que Confiar em Mim?</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <Award className="text-blue-900 mb-4" size={32} />
+              <h3 className="font-bold text-blue-900 mb-2 text-lg">Experiência Comprovada</h3>
+              <p className="text-gray-600 text-sm">{YEARS_EXPERIENCE} anos de atuação em perícias e vistorias técnicas</p>
+            </Card>
+
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <FileText className="text-orange-400 mb-4" size={32} />
+              <h3 className="font-bold text-blue-900 mb-2 text-lg">{TOTAL_REPORTS.toLocaleString('pt-BR')}+ Laudos</h3>
+              <p className="text-gray-600 text-sm">Laudos técnicos realizados com precisão e confiabilidade</p>
+            </Card>
+
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <Scale className="text-blue-600 mb-4" size={32} />
+              <h3 className="font-bold text-blue-900 mb-2 text-lg">Perícias Judiciais</h3>
+              <p className="text-gray-600 text-sm">Atuação em TJSP, TRT-15 e TRF-3 com credibilidade jurídica</p>
+            </Card>
+
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <CheckCircle2 className="text-green-600 mb-4" size={32} />
+              <h3 className="font-bold text-blue-900 mb-2 text-lg">CREA-SP {CREA_NUMBER}</h3>
+              <p className="text-gray-600 text-sm">Registro profissional ativo e regularizado</p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* SERVIÇOS */}
       <section id="servicos" className="py-20 bg-white">
         <div className="container max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-blue-900 mb-4 text-center">Serviços Especializados</h2>
-          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">Soluções completas em engenharia diagnóstica, perícias judiciais e vistorias técnicas de imóveis.</p>
+          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Serviços Especializados</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Vistoria de Imóvel */}
-            <Card className="p-6 hover:shadow-lg transition border-0 bg-gray-50">
-              <div className="flex items-center gap-3 mb-4">
-                <HomeIcon className="text-orange-400" size={28} />
-                <h3 className="text-xl font-bold text-blue-900">Vistoria de Imóvel para Locação</h3>
-              </div>
-              <p className="text-gray-600">Laudo detalhado com registro fotográfico completo, identificando condições estruturais e funcionalidades do imóvel.</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="p-6 border-0 bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition">
+              <Building2 className="text-blue-900 mb-4" size={28} />
+              <h3 className="font-bold text-blue-900 mb-3 text-lg">Vistoria de Imóvel</h3>
+              <p className="text-gray-700 text-sm">Laudo detalhado com registro fotográfico completo para locação ou compra</p>
             </Card>
 
-            {/* Laudo de Patologias */}
-            <Card className="p-6 hover:shadow-lg transition border-0 bg-gray-50">
-              <div className="flex items-center gap-3 mb-4">
-                <AlertCircle className="text-orange-400" size={28} />
-                <h3 className="text-xl font-bold text-blue-900">Laudo Técnico de Patologias</h3>
-              </div>
-              <p className="text-gray-600">Diagnóstico especializado de infiltração, fissuras, umidade, mofo e vícios construtivos com recomendações de solução.</p>
+            <Card className="p-6 border-0 bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition">
+              <AlertCircle className="text-orange-600 mb-4" size={28} />
+              <h3 className="font-bold text-blue-900 mb-3 text-lg">Laudo de Patologias</h3>
+              <p className="text-gray-700 text-sm">Diagnóstico de infiltração, fissuras, umidade e vícios construtivos</p>
             </Card>
 
-            {/* Avaliação de Imóveis */}
-            <Card className="p-6 hover:shadow-lg transition border-0 bg-gray-50">
-              <div className="flex items-center gap-3 mb-4">
-                <TrendingUp className="text-orange-400" size={28} />
-                <h3 className="text-xl font-bold text-blue-900">Avaliação de Imóveis</h3>
-              </div>
-              <p className="text-gray-600">Laudo técnico conforme NBR 14653, determinando valor de mercado com metodologia científica e precisa.</p>
+            <Card className="p-6 border-0 bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition">
+              <TrendingUp className="text-green-600 mb-4" size={28} />
+              <h3 className="font-bold text-blue-900 mb-3 text-lg">Avaliação de Imóvel</h3>
+              <p className="text-gray-700 text-sm">Laudo técnico conforme NBR 14653 para fins de mercado</p>
             </Card>
 
-            {/* Inspeção Predial */}
-            <Card className="p-6 hover:shadow-lg transition border-0 bg-gray-50">
-              <div className="flex items-center gap-3 mb-4">
-                <Building2 className="text-orange-400" size={28} />
-                <h3 className="text-xl font-bold text-blue-900">Inspeção Predial</h3>
-              </div>
-              <p className="text-gray-600">Check-up técnico completo conforme NBR 16747, avaliando estrutura, sistemas e segurança do imóvel.</p>
+            <Card className="p-6 border-0 bg-gradient-to-br from-purple-50 to-purple-100 hover:shadow-lg transition">
+              <Zap className="text-purple-600 mb-4" size={28} />
+              <h3 className="font-bold text-blue-900 mb-3 text-lg">Inspeção Predial</h3>
+              <p className="text-gray-700 text-sm">Check-up técnico completo conforme NBR 16747</p>
             </Card>
 
-            {/* Perícia de Engenharia */}
-            <Card className="p-6 hover:shadow-lg transition border-0 bg-gray-50">
-              <div className="flex items-center gap-3 mb-4">
-                <Scale className="text-orange-400" size={28} />
-                <h3 className="text-xl font-bold text-blue-900">Perícia de Engenharia</h3>
-              </div>
-              <p className="text-gray-600">Laudos técnicos especializados para processos judiciais, com fundamentação científica e rigor metodológico.</p>
+            <Card className="p-6 border-0 bg-gradient-to-br from-red-50 to-red-100 hover:shadow-lg transition">
+              <Scale className="text-red-600 mb-4" size={28} />
+              <h3 className="font-bold text-blue-900 mb-3 text-lg">Perícia de Engenharia</h3>
+              <p className="text-gray-700 text-sm">Laudos técnicos utilizados em processos judiciais</p>
             </Card>
 
-            {/* Assistência Técnica */}
-            <Card className="p-6 hover:shadow-lg transition border-0 bg-gray-50">
-              <div className="flex items-center gap-3 mb-4">
-                <Briefcase className="text-orange-400" size={28} />
-                <h3 className="text-xl font-bold text-blue-900">Assistência Técnica Pericial</h3>
-              </div>
-              <p className="text-gray-600">Suporte especializado para escritórios de advocacia: formulação de quesitos, parecer técnico e acompanhamento.</p>
+            <Card className="p-6 border-0 bg-gradient-to-br from-indigo-50 to-indigo-100 hover:shadow-lg transition">
+              <Briefcase className="text-indigo-600 mb-4" size={28} />
+              <h3 className="font-bold text-blue-900 mb-3 text-lg">Assistência Técnica</h3>
+              <p className="text-gray-700 text-sm">Suporte pericial para escritórios de advocacia e clientes</p>
             </Card>
           </div>
         </div>
       </section>
 
       {/* PROBLEMAS QUE RESOLVEMOS */}
-      <section className="py-20 bg-gray-50">
+      <section id="problemas" className="py-20 bg-gray-50">
         <div className="container max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Problemas que Resolvemos</h2>
+          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Problemas Que Resolvemos</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="flex gap-4">
-              <CheckCircle2 className="text-orange-400 flex-shrink-0 mt-1" size={24} />
+              <CheckCircle2 className="text-green-600 flex-shrink-0" size={24} />
               <div>
-                <h3 className="font-bold text-lg text-blue-900 mb-2">Conflitos entre Locador e Locatário</h3>
-                <p className="text-gray-600">Laudos técnicos imparciais para resolver disputas sobre danos e responsabilidades no imóvel locado.</p>
+                <h3 className="font-bold text-blue-900 mb-2">Conflitos entre Locador e Locatário</h3>
+                <p className="text-gray-600">Laudos que comprovam responsabilidades e danos</p>
               </div>
             </div>
 
             <div className="flex gap-4">
-              <CheckCircle2 className="text-orange-400 flex-shrink-0 mt-1" size={24} />
+              <CheckCircle2 className="text-green-600 flex-shrink-0" size={24} />
               <div>
-                <h3 className="font-bold text-lg text-blue-900 mb-2">Problemas de Infiltração ou Fissuras</h3>
-                <p className="text-gray-600">Diagnóstico técnico especializado identificando causas e recomendando soluções duráveis.</p>
+                <h3 className="font-bold text-blue-900 mb-2">Problemas de Infiltração ou Fissuras</h3>
+                <p className="text-gray-600">Diagnóstico preciso da origem e solução</p>
               </div>
             </div>
 
             <div className="flex gap-4">
-              <CheckCircle2 className="text-orange-400 flex-shrink-0 mt-1" size={24} />
+              <CheckCircle2 className="text-green-600 flex-shrink-0" size={24} />
               <div>
-                <h3 className="font-bold text-lg text-blue-900 mb-2">Danos Estruturais</h3>
-                <p className="text-gray-600">Avaliação completa de problemas estruturais com recomendações de reparo e segurança.</p>
+                <h3 className="font-bold text-blue-900 mb-2">Danos Estruturais</h3>
+                <p className="text-gray-600">Avaliação técnica e recomendações de reparo</p>
               </div>
             </div>
 
             <div className="flex gap-4">
-              <CheckCircle2 className="text-orange-400 flex-shrink-0 mt-1" size={24} />
+              <CheckCircle2 className="text-green-600 flex-shrink-0" size={24} />
               <div>
-                <h3 className="font-bold text-lg text-blue-900 mb-2">Disputas Judiciais Envolvendo Imóveis</h3>
-                <p className="text-gray-600">Perícia técnica com fundamentação científica para processos judiciais em tribunais.</p>
+                <h3 className="font-bold text-blue-900 mb-2">Disputas Judiciais</h3>
+                <p className="text-gray-600">Laudos com validade jurídica comprovada</p>
               </div>
             </div>
 
             <div className="flex gap-4">
-              <CheckCircle2 className="text-orange-400 flex-shrink-0 mt-1" size={24} />
+              <CheckCircle2 className="text-green-600 flex-shrink-0" size={24} />
               <div>
-                <h3 className="font-bold text-lg text-blue-900 mb-2">Avaliação de Valor de Mercado</h3>
-                <p className="text-gray-600">Laudos de avaliação conforme NBR 14653 para fins de compra, venda ou financiamento.</p>
+                <h3 className="font-bold text-blue-900 mb-2">Avaliação de Valor de Mercado</h3>
+                <p className="text-gray-600">Laudos conforme normas técnicas brasileiras</p>
               </div>
             </div>
 
             <div className="flex gap-4">
-              <CheckCircle2 className="text-orange-400 flex-shrink-0 mt-1" size={24} />
+              <CheckCircle2 className="text-green-600 flex-shrink-0" size={24} />
               <div>
-                <h3 className="font-bold text-lg text-blue-900 mb-2">Impugnação de Laudos</h3>
-                <p className="text-gray-600">Análise crítica e contra-perícia de laudos técnicos anteriores com parecer especializado.</p>
+                <h3 className="font-bold text-blue-900 mb-2">Assistência Técnica Pericial</h3>
+                <p className="text-gray-600">Suporte completo para processos judiciais</p>
               </div>
             </div>
           </div>
@@ -250,197 +238,125 @@ export default function HomePage() {
       </section>
 
       {/* ASSISTÊNCIA TÉCNICA PARA ADVOGADOS */}
-      <section id="assistencia" className="py-20 bg-white">
+      <section id="assistencia" className="py-20 bg-blue-50">
         <div className="container max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-blue-900 mb-6">Assistência Técnica para Advogados</h2>
-              <p className="text-gray-600 mb-6 text-lg">Suporte especializado para escritórios de advocacia em processos que envolvem questões técnicas de engenharia.</p>
+          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Assistência Técnica para Advogados</h2>
 
-              <div className="space-y-4">
-                <div className="flex gap-3">
-                  <Zap className="text-orange-400 flex-shrink-0" size={24} />
-                  <div>
-                    <h4 className="font-bold text-blue-900">Formulação de Quesitos</h4>
-                    <p className="text-gray-600 text-sm">Elaboração de quesitos técnicos precisos e eficazes para perícia.</p>
-                  </div>
-                </div>
+          <div className="bg-white rounded-lg p-8 border-l-4 border-orange-400">
+            <p className="text-gray-700 mb-6 text-lg leading-relaxed">
+              Ofereço assistência técnica pericial especializada para escritórios de advocacia, incluindo:
+            </p>
 
-                <div className="flex gap-3">
-                  <Zap className="text-orange-400 flex-shrink-0" size={24} />
-                  <div>
-                    <h4 className="font-bold text-blue-900">Parecer Técnico</h4>
-                    <p className="text-gray-600 text-sm">Análise técnica especializada para fundamentar argumentação jurídica.</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <Zap className="text-orange-400 flex-shrink-0" size={24} />
-                  <div>
-                    <h4 className="font-bold text-blue-900">Acompanhamento do Perito Judicial</h4>
-                    <p className="text-gray-600 text-sm">Suporte durante a perícia e análise de laudos produzidos.</p>
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <Zap className="text-orange-400 flex-shrink-0" size={24} />
-                  <div>
-                    <h4 className="font-bold text-blue-900">Impugnação de Laudos</h4>
-                    <p className="text-gray-600 text-sm">Contra-perícia e parecer crítico sobre laudos adversários.</p>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex gap-3">
+                <FileText className="text-orange-400 flex-shrink-0" size={20} />
+                <div>
+                  <h4 className="font-bold text-blue-900 mb-1">Formulação de Quesitos</h4>
+                  <p className="text-gray-600 text-sm">Orientação técnica para quesitos pertinentes</p>
                 </div>
               </div>
 
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-block mt-8 bg-orange-400 hover:bg-orange-500 text-white px-8 py-3 rounded font-bold transition">
-                Solicitar Assistência
-              </a>
-            </div>
+              <div className="flex gap-3">
+                <FileText className="text-orange-400 flex-shrink-0" size={20} />
+                <div>
+                  <h4 className="font-bold text-blue-900 mb-1">Parecer Técnico</h4>
+                  <p className="text-gray-600 text-sm">Análise técnica fundamentada para processos</p>
+                </div>
+              </div>
 
-            <div>
-              <img src={AUTORIDADE_BG} alt="Assistência Técnica para Advogados" className="rounded-lg shadow-lg" />
+              <div className="flex gap-3">
+                <Users className="text-orange-400 flex-shrink-0" size={20} />
+                <div>
+                  <h4 className="font-bold text-blue-900 mb-1">Acompanhamento Judicial</h4>
+                  <p className="text-gray-600 text-sm">Suporte durante todo o processo pericial</p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <AlertCircle className="text-orange-400 flex-shrink-0" size={20} />
+                <div>
+                  <h4 className="font-bold text-blue-900 mb-1">Impugnação de Laudos</h4>
+                  <p className="text-gray-600 text-sm">Análise crítica de laudos da parte contrária</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* SOBRE */}
-      <section id="sobre" className="py-20 bg-gray-50">
+      <section id="sobre" className="py-20 bg-white">
         <div className="container max-w-6xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Sobre o Engenheiro</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
-              <div className="bg-blue-900 text-white p-8 rounded-lg">
-                <h3 className="text-2xl font-bold mb-4">Eng. Gustavo da Silva Freitas</h3>
-                <p className="mb-4">Engenheiro Civil e Engenheiro de Segurança do Trabalho</p>
-                <p className="mb-4 font-bold">CREA-SP 5071007855</p>
+              <h3 className="text-2xl font-bold text-blue-900 mb-6">{PROFESSIONAL_NAME}</h3>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                Engenheiro Civil e Engenheiro de Segurança do Trabalho com {YEARS_EXPERIENCE} anos de experiência em engenharia diagnóstica, perícias técnicas e elaboração de laudos especializados.
+              </p>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                Realizado mais de {TOTAL_REPORTS.toLocaleString('pt-BR')} laudos técnicos com precisão e confiabilidade, atuando em perícias judiciais e extrajudiciais nos tribunais TJSP, TRT-15 e TRF-3.
+              </p>
+              <p className="text-gray-700 leading-relaxed">
+                Especialista em diagnóstico de patologias construtivas, avaliação de imóveis conforme NBR 14653, inspeção predial conforme NBR 16747 e assistência técnica pericial para processos judiciais.
+              </p>
+            </div>
 
-                <div className="space-y-3 mt-6 border-t border-blue-700 pt-6">
-                  <p><strong>Experiência:</strong> 7 anos em engenharia diagnóstica e perícias</p>
-                  <p><strong>Laudos Realizados:</strong> Mais de 15.000 laudos técnicos</p>
-                  <p><strong>Especialidade:</strong> Perícias judiciais, vistorias técnicas e avaliações imobiliárias</p>
-                  <p><strong>Atuação:</strong> TJSP, TRT-15 e TRF-3</p>
+            <Card className="p-8 border-0 bg-gradient-to-br from-blue-50 to-blue-100">
+              <h3 className="text-xl font-bold text-blue-900 mb-6">Credenciais Profissionais</h3>
+
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-gray-600">Profissão</p>
+                  <p className="font-bold text-blue-900">Engenheiro Civil e de Segurança do Trabalho</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-600">CREA-SP</p>
+                  <p className="font-bold text-blue-900">{CREA_NUMBER}</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-600">Experiência</p>
+                  <p className="font-bold text-blue-900">{YEARS_EXPERIENCE} anos</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-600">Laudos Realizados</p>
+                  <p className="font-bold text-blue-900">{TOTAL_REPORTS.toLocaleString('pt-BR')}+</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-600">Atuação Geográfica</p>
+                  <p className="font-bold text-blue-900">{REGION}</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-600">Avaliação</p>
+                  <p className="font-bold text-blue-900">⭐ {RATING} ({REVIEW_COUNT}+ avaliações)</p>
                 </div>
               </div>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-6">Especialização em Engenharia Diagnóstica</h3>
-              <p className="text-gray-600 mb-4">Com mais de 7 anos de experiência, o Eng. Gustavo da Silva Freitas é especialista em engenharia diagnóstica, perícias judiciais e elaboração de laudos técnicos com rigor metodológico e confiabilidade jurídica.</p>
-
-              <p className="text-gray-600 mb-4">Sua atuação abrange perícias em tribunais estaduais e federais (TJSP, TRT-15, TRF-3), com mais de 15.000 laudos realizados, cobrindo vistorias de imóveis, diagnóstico de patologias, avaliações imobiliárias e inspeções prediais.</p>
-
-              <p className="text-gray-600">Oferece assistência técnica especializada para escritórios de advocacia, formulando quesitos, elaborando pareceres técnicos e acompanhando perícias judiciais com precisão e profissionalismo.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* DEPOIMENTOS */}
-      <section className="py-20 bg-white">
-        <div className="container max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Depoimentos de Clientes</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="p-6 border-0 bg-gray-50">
-              <div className="flex items-center gap-2 mb-4">
-                {[...Array(5)].map((_, i) => <span key={i} className="text-yellow-400">★</span>)}
-              </div>
-              <p className="text-gray-600 mb-4 italic">"Excelente profissional. Laudo técnico muito bem elaborado, com fotografias de qualidade e análise detalhada. Recomendo!"</p>
-              <p className="font-bold text-blue-900">João Silva</p>
-              <p className="text-sm text-gray-500">Cliente - Vistoria de Imóvel</p>
-            </Card>
-
-            <Card className="p-6 border-0 bg-gray-50">
-              <div className="flex items-center gap-2 mb-4">
-                {[...Array(5)].map((_, i) => <span key={i} className="text-yellow-400">★</span>)}
-              </div>
-              <p className="text-gray-600 mb-4 italic">"Profissional muito competente. Seu laudo foi fundamental para resolver nossa disputa judicial. Muito obrigado!"</p>
-              <p className="font-bold text-blue-900">Dra. Maria Santos</p>
-              <p className="text-sm text-gray-500">Advogada - Perícia Judicial</p>
-            </Card>
-
-            <Card className="p-6 border-0 bg-gray-50">
-              <div className="flex items-center gap-2 mb-4">
-                {[...Array(5)].map((_, i) => <span key={i} className="text-yellow-400">★</span>)}
-              </div>
-              <p className="text-gray-600 mb-4 italic">"Atendimento ágil, profissional e confiável. Recomendo para qualquer tipo de perícia ou vistoria técnica."</p>
-              <p className="font-bold text-blue-900">Carlos Oliveira</p>
-              <p className="text-sm text-gray-500">Imobiliária - Avaliação de Imóvel</p>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-20 bg-gray-50">
-        <div className="container max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Perguntas Frequentes</h2>
-
-          <div className="max-w-3xl mx-auto space-y-6">
-            <Card className="p-6 border-0">
-              <h3 className="font-bold text-lg text-blue-900 mb-3">Quanto custa uma vistoria?</h3>
-              <p className="text-gray-600">O valor varia conforme o tipo e complexidade da vistoria. Para imóveis residenciais, o valor é mais acessível. Solicite um orçamento via WhatsApp com detalhes do imóvel.</p>
-            </Card>
-
-            <Card className="p-6 border-0">
-              <h3 className="font-bold text-lg text-blue-900 mb-3">Qual prazo para entrega do laudo?</h3>
-              <p className="text-gray-600">Geralmente, o laudo é entregue em 5 a 10 dias úteis após a vistoria. Para casos urgentes, podemos negociar prazos menores.</p>
-            </Card>
-
-            <Card className="p-6 border-0">
-              <h3 className="font-bold text-lg text-blue-900 mb-3">O laudo tem validade jurídica?</h3>
-              <p className="text-gray-600">Sim. Todos os laudos são elaborados conforme normas técnicas (NBR) e têm validade jurídica para fins de processos judiciais, financiamentos e transações imobiliárias.</p>
-            </Card>
-
-            <Card className="p-6 border-0">
-              <h3 className="font-bold text-lg text-blue-900 mb-3">Atende em qual região?</h3>
-              <p className="text-gray-600">Atendimento em Campinas, Hortolândia, Sumaré, Paulínia, Valinhos e região. Para localidades mais distantes, consulte disponibilidade.</p>
-            </Card>
-
-            <Card className="p-6 border-0">
-              <h3 className="font-bold text-lg text-blue-900 mb-3">Como agendar uma vistoria?</h3>
-              <p className="text-gray-600">Clique no botão "Falar no WhatsApp" e descreva sua necessidade. Você receberá um orçamento e poderá agendar a data mais conveniente.</p>
             </Card>
           </div>
         </div>
       </section>
 
       {/* CALCULADORA DE PREÇOS */}
-      <PriceCalculator />
-
-      {/* AGENDAMENTO CALENDLY */}
-      <CalendlyWidget />
-
-      {/* BLOG */}
-      <section id="blog" className="py-20 bg-white">
-        <div className="container max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Blog & Artigos</h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Conteúdo técnico sobre perícias, vistorias e engenharia diagnóstica.</p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="p-6 border-0 bg-gray-50 hover:shadow-lg transition">
-              <h3 className="font-bold text-lg text-blue-900 mb-3">Como Identificar Infiltração em Imóveis</h3>
-              <p className="text-gray-600 mb-4 text-sm">Guia técnico sobre os principais sinais de infiltração e como diagnosticar problemas de umidade em construções.</p>
-              <a href="#" className="text-orange-400 font-bold hover:text-orange-500">Leia mais →</a>
-            </Card>
-
-            <Card className="p-6 border-0 bg-gray-50 hover:shadow-lg transition">
-              <h3 className="font-bold text-lg text-blue-900 mb-3">NBR 14653: Avaliação de Imóveis</h3>
-              <p className="text-gray-600 mb-4 text-sm">Entenda a norma técnica brasileira para avaliação de propriedades e como ela garante precisão nos laudos.</p>
-              <a href="#" className="text-orange-400 font-bold hover:text-orange-500">Leia mais →</a>
-            </Card>
-
-            <Card className="p-6 border-0 bg-gray-50 hover:shadow-lg transition">
-              <h3 className="font-bold text-lg text-blue-900 mb-3">Perícia Judicial: O Papel do Engenheiro</h3>
-              <p className="text-gray-600 mb-4 text-sm">Saiba como a perícia técnica é fundamental em processos judiciais e como o engenheiro contribui para a decisão.</p>
-              <a href="#" className="text-orange-400 font-bold hover:text-orange-500">Leia mais →</a>
-            </Card>
-          </div>
+      <section className="py-20 bg-gray-50">
+        <div className="container max-w-4xl mx-auto px-4">
+          <PriceCalculator />
         </div>
       </section>
 
-      {/* FORMULÁRIO DE LEAD PROFISSIONAL */}
+      {/* AGENDAMENTO CALENDLY */}
+      <section id="calendly" className="py-20 bg-white">
+        <div className="container max-w-4xl mx-auto px-4">
+          <CalendlyWidget />
+        </div>
+      </section>
+
+      {/* FORMULÁRIO DE LEAD */}
       <section id="contato" className="py-20 bg-gradient-to-br from-slate-50 to-slate-100">
         <div className="container max-w-4xl mx-auto px-4">
           <LeadForm />
@@ -456,22 +372,22 @@ export default function HomePage() {
             <Card className="p-6 text-center border-0 bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition">
               <MessageCircle className="w-12 h-12 text-green-600 mx-auto mb-4" />
               <h4 className="font-bold text-blue-900 mb-2 text-lg">WhatsApp</h4>
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 font-bold text-lg">(19) 98904-5748</a>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 font-bold text-lg">{PHONE_DISPLAY}</a>
               <p className="text-xs text-gray-600 mt-2">Resposta em até 2 horas</p>
             </Card>
 
             <Card className="p-6 text-center border-0 bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition">
               <Award className="w-12 h-12 text-blue-600 mx-auto mb-4" />
               <h4 className="font-bold text-blue-900 mb-2 text-lg">CREA-SP</h4>
-              <p className="text-blue-600 font-bold text-lg">5071007855</p>
+              <p className="text-blue-600 font-bold text-lg">{CREA_NUMBER}</p>
               <p className="text-xs text-gray-600 mt-2">Registro profissional</p>
             </Card>
 
             <Card className="p-6 text-center border-0 bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition">
               <Briefcase className="w-12 h-12 text-orange-600 mx-auto mb-4" />
               <h4 className="font-bold text-blue-900 mb-2 text-lg">Experiência</h4>
-              <p className="text-orange-600 font-bold text-lg">7 Anos</p>
-              <p className="text-xs text-gray-600 mt-2">15.000+ laudos realizados</p>
+              <p className="text-orange-600 font-bold text-lg">{YEARS_EXPERIENCE} Anos</p>
+              <p className="text-xs text-gray-600 mt-2">{TOTAL_REPORTS.toLocaleString('pt-BR')}+ laudos</p>
             </Card>
 
             <Card className="p-6 text-center border-0 bg-gradient-to-br from-purple-50 to-purple-100 hover:shadow-lg transition">
@@ -484,18 +400,45 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* BLOG */}
+      <section id="blog" className="py-20 bg-gray-50">
+        <div className="container max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Blog Técnico</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <h3 className="font-bold text-lg text-blue-900 mb-3">Como Identificar Infiltração em Imóveis</h3>
+              <p className="text-gray-600 mb-4 text-sm">Guia técnico sobre os principais sinais de infiltração e como diagnosticar problemas de umidade em construções.</p>
+              <a href="#" className="text-orange-400 font-bold hover:text-orange-500">Leia mais →</a>
+            </Card>
+
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <h3 className="font-bold text-lg text-blue-900 mb-3">NBR 14653: Avaliação de Imóveis</h3>
+              <p className="text-gray-600 mb-4 text-sm">Entenda a norma técnica brasileira para avaliação de propriedades e como ela garante precisão nos laudos.</p>
+              <a href="#" className="text-orange-400 font-bold hover:text-orange-500">Leia mais →</a>
+            </Card>
+
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <h3 className="font-bold text-lg text-blue-900 mb-3">Perícia Judicial: O Papel do Engenheiro</h3>
+              <p className="text-gray-600 mb-4 text-sm">Saiba como a perícia técnica é fundamental em processos judiciais e como o engenheiro contribui para a decisão.</p>
+              <a href="#" className="text-orange-400 font-bold hover:text-orange-500">Leia mais →</a>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* FOOTER */}
       <footer className="bg-blue-900 text-white py-12">
         <div className="container max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h4 className="font-bold mb-4">Eng. Gustavo Freitas</h4>
-              <p className="text-gray-300 text-sm">Especialista em perícias de engenharia e vistorias técnicas de imóveis.</p>
+              <h4 className="font-bold mb-4">{PROFESSIONAL_NAME}</h4>
+              <p className="text-gray-300 text-sm">Especialista em perícias de engenharia e vistorias técnicas de imóveis em Campinas e região.</p>
             </div>
 
             <div>
               <h4 className="font-bold mb-4">Serviços</h4>
-              <ul className="text-gray-300 text-sm space-y-2">
+              <ul className="space-y-2 text-sm text-gray-300">
                 <li><a href="#servicos" className="hover:text-white">Vistoria de Imóvel</a></li>
                 <li><a href="#servicos" className="hover:text-white">Laudo Técnico</a></li>
                 <li><a href="#servicos" className="hover:text-white">Perícia Judicial</a></li>
@@ -504,25 +447,25 @@ export default function HomePage() {
             </div>
 
             <div>
-              <h4 className="font-bold mb-4">Informações</h4>
-              <ul className="text-gray-300 text-sm space-y-2">
+              <h4 className="font-bold mb-4">Links Rápidos</h4>
+              <ul className="space-y-2 text-sm text-gray-300">
+                <li><a href="#inicio" className="hover:text-white">Início</a></li>
+                <li><a href="#servicos" className="hover:text-white">Serviços</a></li>
                 <li><a href="#sobre" className="hover:text-white">Sobre</a></li>
-                <li><a href="#assistencia" className="hover:text-white">Assistência Técnica</a></li>
-                <li><a href="#blog" className="hover:text-white">Blog</a></li>
                 <li><a href="#contato" className="hover:text-white">Contato</a></li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-bold mb-4">Contato</h4>
-              <p className="text-gray-300 text-sm">WhatsApp: (19) 99999-9999</p>
-              <p className="text-gray-300 text-sm">Email: contato@engustavo.com.br</p>
-              <p className="text-gray-300 text-sm">CREA-SP: 5071007855</p>
+              <p className="text-sm text-gray-300 mb-2">WhatsApp: {PHONE_DISPLAY}</p>
+              <p className="text-sm text-gray-300 mb-2">CREA-SP: {CREA_NUMBER}</p>
+              <p className="text-sm text-gray-300">Campinas, SP</p>
             </div>
           </div>
 
-          <div className="border-t border-blue-800 pt-8">
-            <p className="text-gray-300 text-sm text-center">© 2026 Eng. Gustavo Freitas. Todos os direitos reservados. | Perícias de Engenharia em Campinas</p>
+          <div className="border-t border-blue-800 pt-8 text-center text-sm text-gray-300">
+            <p>&copy; 2026 {PROFESSIONAL_NAME}. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>
