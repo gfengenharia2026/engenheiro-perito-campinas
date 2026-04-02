@@ -11,7 +11,7 @@ export default function CrispChat() {
   useEffect(() => {
     // Inicializar Crisp Chat
     (window as any).$crisp = [];
-    (window as any).CRISP_WEBSITE_ID = 'seu-id-crisp-aqui'; // Será substituído pelo usuário
+    (window as any).CRISP_WEBSITE_ID = 'YOUR_CRISP_ID'; // Substitua com seu ID real
 
     const d = document;
     const s = d.createElement('script');

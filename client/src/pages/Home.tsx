@@ -15,7 +15,7 @@ const SERVICOS_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/Ff
 const AUTORIDADE_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/autoridade-background-jPPZs4gbkdNba3Ypb6yR9U.webp';
 const PROBLEMAS_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/problemas-background-hUw6tV8zoisycwdh2NchXw.webp';
 
-const whatsappUrl = 'https://wa.me/5519999999999?text=Olá%20Eng.%20Gustavo,%20gostaria%20de%20agendar%20uma%20vistoria%20técnica.';
+const whatsappUrl = 'https://wa.me/5519989045748?text=Olá%20Eng.%20Gustavo,%20gostaria%20de%20agendar%20uma%20vistoria%20técnica.';
 
 function CounterNumber({ target, duration = 2000 }: { target: number; duration?: number }) {
   const [count, setCount] = useState(0);
@@ -440,50 +440,46 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CONTATO */}
-      <section id="contato" className="py-20 bg-gray-50">
+      {/* FORMULÁRIO DE LEAD PROFISSIONAL */}
+      <section id="contato" className="py-20 bg-gradient-to-br from-slate-50 to-slate-100">
+        <div className="container max-w-4xl mx-auto px-4">
+          <LeadForm />
+        </div>
+      </section>
+
+      {/* INFORMAÇÕES DE CONTATO */}
+      <section className="py-20 bg-white">
         <div className="container max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Entre em Contato</h2>
+          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Outras Formas de Contato</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-6">Formulário de Contato</h3>
-              <form className="space-y-4">
-                <input type="text" placeholder="Seu Nome" className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-900" />
-                <input type="email" placeholder="Seu Email" className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-900" />
-                <input type="tel" placeholder="Seu Telefone" className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-900" />
-                <textarea placeholder="Sua Mensagem" rows={5} className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:border-blue-900"></textarea>
-                <button type="submit" className="w-full bg-orange-400 hover:bg-orange-500 text-white px-6 py-3 rounded font-bold transition">Enviar Mensagem</button>
-              </form>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <Card className="p-6 text-center border-0 bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition">
+              <MessageCircle className="w-12 h-12 text-green-600 mx-auto mb-4" />
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">WhatsApp</h4>
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 font-bold text-lg">(19) 98904-5748</a>
+              <p className="text-xs text-gray-600 mt-2">Resposta em até 2 horas</p>
+            </Card>
 
-            <div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-6">Informações de Contato</h3>
+            <Card className="p-6 text-center border-0 bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition">
+              <Award className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">CREA-SP</h4>
+              <p className="text-blue-600 font-bold text-lg">5071007855</p>
+              <p className="text-xs text-gray-600 mt-2">Registro profissional</p>
+            </Card>
 
-              <div className="space-y-6">
-                <div>
-                  <h4 className="font-bold text-blue-900 mb-2">WhatsApp</h4>
-                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:text-orange-500 font-bold">(19) 99999-9999</a>
-                </div>
+            <Card className="p-6 text-center border-0 bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition">
+              <Briefcase className="w-12 h-12 text-orange-600 mx-auto mb-4" />
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">Experiência</h4>
+              <p className="text-orange-600 font-bold text-lg">7 Anos</p>
+              <p className="text-xs text-gray-600 mt-2">15.000+ laudos realizados</p>
+            </Card>
 
-                <div>
-                  <h4 className="font-bold text-blue-900 mb-2">Email</h4>
-                  <a href="mailto:contato@engustavo.com.br" className="text-orange-400 hover:text-orange-500 font-bold">contato@engustavo.com.br</a>
-                </div>
-
-                <div>
-                  <h4 className="font-bold text-blue-900 mb-2">Localização</h4>
-                  <p className="text-gray-600">Campinas, São Paulo - Brasil</p>
-                  <p className="text-gray-600">Atendimento em Campinas, Hortolândia, Sumaré, Paulínia, Valinhos e região</p>
-                </div>
-
-                <div>
-                  <h4 className="font-bold text-blue-900 mb-2">Profissional</h4>
-                  <p className="text-gray-600">Engenheiro Civil e Engenheiro de Segurança do Trabalho</p>
-                  <p className="text-gray-600">CREA-SP 5071007855</p>
-                </div>
-              </div>
-            </div>
+            <Card className="p-6 text-center border-0 bg-gradient-to-br from-purple-50 to-purple-100 hover:shadow-lg transition">
+              <Building2 className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">Localização</h4>
+              <p className="text-purple-600 font-bold text-lg">Campinas, SP</p>
+              <p className="text-xs text-gray-600 mt-2">Região de Campinas</p>
+            </Card>
           </div>
         </div>
       </section>
