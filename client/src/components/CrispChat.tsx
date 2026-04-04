@@ -16,7 +16,7 @@ export default function CrispChat() {
     // 4. Substitua 'YOUR_CRISP_ID' abaixo pelo seu ID
     
     (window as any).$crisp = [];
-    (window as any).CRISP_WEBSITE_ID = 'YOUR_CRISP_ID'; // TODO: Substitua com seu ID do Crisp
+    (window as any).CRISP_WEBSITE_ID = 'ff6685e8-8071-4a68-8b1a-b4bdd950c428'; // Website ID do Crisp
 
     const d = document;
     const s = d.createElement('script');
