@@ -293,56 +293,78 @@ export default function HomePage() {
       </section>
 
       {/* SOBRE */}
-      <section id="sobre" className="py-20 bg-white">
+      <section id="sobre" className="py-20 bg-[#0D3B66]">
         <div className="container max-w-6xl mx-auto px-4">
-          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Sobre o Engenheiro</h2>
+          <h2 className="text-4xl font-bold text-white mb-12 text-center">Sobre o Engenheiro</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-bold text-blue-900 mb-6">{PROFESSIONAL_NAME}</h3>
-              <p className="text-gray-700 mb-4 leading-relaxed">
-                Engenheiro Civil e Engenheiro de Segurança do Trabalho com {YEARS_EXPERIENCE} anos de experiência em engenharia diagnóstica, perícias técnicas e elaboração de laudos especializados.
-              </p>
-              <p className="text-gray-700 mb-4 leading-relaxed">
-                Realizado mais de {TOTAL_REPORTS.toLocaleString('pt-BR')} laudos técnicos com precisão e confiabilidade, atuando em perícias judiciais e extrajudiciais nos tribunais TJSP, TRT-15 e TRF-3.
-              </p>
-              <p className="text-gray-700 leading-relaxed">
-                Especialista em diagnóstico de patologias construtivas, avaliação de imóveis conforme NBR 14653, inspeção predial conforme NBR 16747 e assistência técnica pericial para processos judiciais.
-              </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Foto */}
+            <div className="flex justify-center order-2 md:order-1">
+              <img 
+                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/Gemini_Generated_Image_u4c3x6u4c3x6u4c3_5c3766c9.webp"
+                alt="Eng. Gustavo Freitas"
+                className="rounded-lg shadow-2xl w-full max-w-md hover:scale-105 transition-transform duration-300"
+              />
             </div>
 
+            {/* Texto */}
+            <div className="order-1 md:order-2">
+              <h3 className="text-2xl font-bold text-white mb-6">{PROFESSIONAL_NAME}</h3>
+              <p className="text-gray-100 mb-4 leading-relaxed">
+                Engenheiro Civil e Engenheiro de Segurança do Trabalho com {YEARS_EXPERIENCE} anos de experiência em engenharia diagnóstica, perícias técnicas e elaboração de laudos especializados.
+              </p>
+              <p className="text-gray-100 mb-4 leading-relaxed">
+                Realizado mais de {TOTAL_REPORTS.toLocaleString('pt-BR')} laudos técnicos com precisão e confiabilidade, atuando em perícias judiciais e extrajudiciais nos tribunais TJSP, TRT-15 e TRF-3.
+              </p>
+              <p className="text-gray-100 leading-relaxed mb-6">
+                Especialista em diagnóstico de patologias construtivas, avaliação de imóveis conforme NBR 14653, inspeção predial conforme NBR 16747 e assistência técnica pericial para processos judiciais.
+              </p>
+              
+              <button className="bg-[#F59E0B] hover:bg-[#E59E0B] text-white px-8 py-3 rounded-lg font-bold transition-colors">
+                Falar no WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CREDENCIAIS */}
+      <section className="py-20 bg-white">
+        <div className="container max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-[#0D3B66] mb-12 text-center">Credenciais Profissionais</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card className="p-8 border-0 bg-gradient-to-br from-blue-50 to-blue-100">
-              <h3 className="text-xl font-bold text-blue-900 mb-6">Credenciais Profissionais</h3>
+              <h3 className="text-xl font-bold text-[#0D3B66] mb-6">Qualificações</h3>
 
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-gray-600">Profissão</p>
-                  <p className="font-bold text-blue-900">Engenheiro Civil e de Segurança do Trabalho</p>
+                  <p className="font-bold text-[#0D3B66]">Engenheiro Civil e de Segurança do Trabalho</p>
                 </div>
 
                 <div>
                   <p className="text-sm text-gray-600">CREA-SP</p>
-                  <p className="font-bold text-blue-900">{CREA_NUMBER}</p>
+                  <p className="font-bold text-[#0D3B66]">{CREA_NUMBER}</p>
                 </div>
 
                 <div>
                   <p className="text-sm text-gray-600">Experiência</p>
-                  <p className="font-bold text-blue-900">{YEARS_EXPERIENCE} anos</p>
+                  <p className="font-bold text-[#0D3B66]">{YEARS_EXPERIENCE} anos</p>
                 </div>
 
                 <div>
                   <p className="text-sm text-gray-600">Laudos Realizados</p>
-                  <p className="font-bold text-blue-900">{TOTAL_REPORTS.toLocaleString('pt-BR')}+</p>
+                  <p className="font-bold text-[#0D3B66]">{TOTAL_REPORTS.toLocaleString('pt-BR')}+</p>
                 </div>
 
                 <div>
                   <p className="text-sm text-gray-600">Atuação Geográfica</p>
-                  <p className="font-bold text-blue-900">{REGION}</p>
+                  <p className="font-bold text-[#0D3B66]">{REGION}</p>
                 </div>
 
                 <div>
                   <p className="text-sm text-gray-600">Avaliação</p>
-                  <p className="font-bold text-blue-900">⭐ {RATING} ({REVIEW_COUNT}+ avaliações)</p>
+                  <p className="font-bold text-[#0D3B66]">⭐ {RATING} ({REVIEW_COUNT}+ avaliações)</p>
                 </div>
               </div>
             </Card>
