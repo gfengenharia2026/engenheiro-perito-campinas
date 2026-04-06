@@ -33,7 +33,7 @@ export default function CalendlyWidget() {
         <div className="bg-white rounded-lg shadow-2xl overflow-hidden border border-gray-200">
           <div
             className="calendly-inline-widget"
-            data-url="https://calendly.com/seu-usuario/vistoria?hide_event_type_details=1&hide_gdpr_block=1"
+            data-url="https://calendly.com/gustavo-freitas/vistoria?hide_event_type_details=1&hide_gdpr_block=1&background_color=0d3b66"
             style={{ minWidth: '320px', height: '630px' }}
           />
         </div>
@@ -44,7 +44,7 @@ export default function CalendlyWidget() {
             ⚠️ Calendly não carregou?
           </p>
           <p className="text-orange-800 mb-4">
-            Sem problema! Clique no botão WhatsApp abaixo e agende diretamente conosco.
+            Sem problema! Clique no botão WhatsApp abaixo e agende diretamente conosco. (Nota: Configure sua URL do Calendly em CalendlyWidget.tsx)
           </p>
           <a
             href="https://wa.me/5519989045748?text=Olá%20Eng.%20Gustavo,%20gostaria%20de%20agendar%20uma%20vistoria%20técnica."
