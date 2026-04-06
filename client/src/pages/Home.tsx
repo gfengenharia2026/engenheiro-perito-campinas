@@ -1,8 +1,6 @@
 import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { MessageCircle, CheckCircle2, Award, Briefcase, Users, FileText, Home as HomeIcon, Zap, AlertCircle, Scale, Building2, TrendingUp, Sparkles, ArrowRight } from 'lucide-react';
+import { MessageCircle, CheckCircle2, Award, Briefcase, Users, FileText, Home as HomeIcon, Zap, AlertCircle, Scale, Building2, TrendingUp } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import CalendlyWidget from '@/components/CalendlyWidget';
 import PriceCalculator from '@/components/PriceCalculator';
@@ -14,20 +12,9 @@ import { WHATSAPP_URL, PHONE_DISPLAY, PROFESSIONAL_NAME, CREA_NUMBER, YEARS_EXPE
 import RiskCalculator from '@/components/RiskCalculator';
 
 const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/hero-engenheiro-YD5NWNMKezgrrJhjC8vjux.webp';
-
-// Padrão técnico SVG para background futurista
-const TechPattern = () => (
-  <svg className="absolute inset-0 w-full h-full opacity-10" preserveAspectRatio="none">
-    <defs>
-      <pattern id="tech-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5"/>
-        <circle cx="0" cy="0" r="1" fill="white"/>
-        <circle cx="40" cy="40" r="1" fill="white"/>
-      </pattern>
-    </defs>
-    <rect width="100%" height="100%" fill="url(#tech-grid)" />
-  </svg>
-);
+const SERVICOS_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/servicos-background-cFUjx8bDgh9m4NPLSfybPN.webp';
+const AUTORIDADE_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/autoridade-background-jPPZs4gbkdNba3Ypb6yR9U.webp';
+const PROBLEMAS_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/problemas-background-hUw6tV8zoisycwdh2NchXw.webp';
 
 function CounterNumber({ target, duration = 2000 }: { target: number; duration?: number }) {
   const [count, setCount] = useState(0);
@@ -50,28 +37,6 @@ function CounterNumber({ target, duration = 2000 }: { target: number; duration?:
   return <span>{count.toLocaleString('pt-BR')}</span>;
 }
 
-// Componente de animação de entrada
-const FadeInUp = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay }}
-    viewport={{ once: true }}
-  >
-    {children}
-  </motion.div>
-);
-
-// Componente de hover scale
-const HoverScale = ({ children }: { children: React.ReactNode }) => (
-  <motion.div
-    whileHover={{ scale: 1.05 }}
-    transition={{ duration: 0.3 }}
-  >
-    {children}
-  </motion.div>
-);
-
 export default function HomePage() {
   const { user, isAuthenticated } = useAuth();
   
@@ -80,169 +45,93 @@ export default function HomePage() {
       <CrispChat />
       <Header />
 
-      {/* HERO SECTION - MODERNO COM PADRÃO TÉCNICO */}
-      <section id="inicio" className="pt-32 pb-20 relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950">
-        {/* Padrão técnico futurista */}
-        <TechPattern />
-        
-        {/* Gradiente overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-transparent to-blue-900/80 z-5"></div>
-        
-        {/* Imagem de fundo */}
+      {/* HERO SECTION */}
+      <section id="inicio" className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img src={HERO_BG} alt="Perícias de Engenharia" className="w-full h-full object-cover opacity-20" />
+          <img src={HERO_BG} alt="Perícias de Engenharia" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-black/40"></div>
         </div>
-
-        {/* Elementos decorativos animados */}
-        <motion.div 
-          className="absolute top-20 right-10 w-72 h-72 bg-yellow-400/10 rounded-full blur-3xl"
-          animate={{ y: [0, 20, 0] }}
-          transition={{ duration: 6, repeat: Infinity }}
-          style={{ zIndex: 1 }}
-        />
-        <motion.div 
-          className="absolute bottom-10 left-10 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          style={{ zIndex: 1 }}
-        />
 
         <div className="container max-w-6xl mx-auto px-4 relative z-10">
           <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              {/* Badge com amarelo/ouro */}
-              <div className="inline-flex items-center gap-2 bg-yellow-400/20 border border-yellow-400/50 rounded-full px-4 py-2 mb-6">
-                <Sparkles size={16} className="text-yellow-400" />
-                <span className="text-yellow-300 font-semibold text-sm">Excelência em Perícias Técnicas</span>
-              </div>
-
-              {/* Título impactante com hierarquia */}
-              <h1 className="text-5xl md:text-7xl font-black text-white mb-4 leading-tight">
-                Perícias e Vistorias
-              </h1>
-              <h2 className="text-3xl md:text-5xl font-bold text-yellow-400 mb-6 leading-tight">
-                Técnicas de Engenharia
-              </h2>
-              
-              <p className="text-lg md:text-xl text-gray-100 mb-8 leading-relaxed max-w-2xl">
-                Engenheiro civil especialista em laudos técnicos, perícias judiciais e vistorias imobiliárias. Mais de <span className="text-yellow-400 font-bold">{TOTAL_REPORTS.toLocaleString('pt-BR')} laudos</span> realizados com precisão e confiabilidade em Campinas e região.
-              </p>
-            </motion.div>
-
-            {/* CTAs com amarelo/ouro em destaque */}
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <HoverScale>
-                <a 
-                  href={WHATSAPP_URL} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="inline-flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-blue-900 px-8 py-4 rounded-lg font-bold text-lg transition shadow-lg hover:shadow-xl"
-                >
-                  <MessageCircle size={20} />
-                  Falar no WhatsApp
-                  <ArrowRight size={18} />
-                </a>
-              </HoverScale>
-              
-              <HoverScale>
-                <button 
-                  onClick={() => document.getElementById('calendly')?.scrollIntoView({ behavior: 'smooth' })} 
-                  className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg transition backdrop-blur-sm"
-                >
-                  Agendar Vistoria
-                  <ArrowRight size={18} />
-                </button>
-              </HoverScale>
-            </motion.div>
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+              Perícias e Vistorias Técnicas de Engenharia em Campinas e Região
+            </h1>
+            <p className="text-xl text-gray-100 mb-8 leading-relaxed">
+              Engenheiro civil especialista em laudos técnicos, perícias judiciais e vistorias imobiliárias. Mais de {TOTAL_REPORTS.toLocaleString('pt-BR')} laudos realizados com precisão e confiabilidade.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-orange-400 hover:bg-orange-500 text-white px-8 py-4 rounded-lg font-bold text-lg transition transform hover:scale-105">
+                <MessageCircle size={20} />
+                Falar no WhatsApp
+              </a>
+              <button onClick={() => document.getElementById('calendly')?.scrollIntoView({ behavior: 'smooth' })} className="inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-blue-900 px-8 py-4 rounded-lg font-bold text-lg transition">
+                Agendar Vistoria
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* PROVA SOCIAL - COM AMARELO/OURO */}
-      <section className="bg-gradient-to-r from-blue-900 to-blue-800 text-white py-8 relative overflow-hidden">
-        {/* Linha amarela decorativa no topo */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent"></div>
-        
+      {/* PROVA SOCIAL */}
+      <section className="bg-blue-900 text-white py-6">
         <div className="container max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <FadeInUp delay={0}>
-              <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
-                <div className="text-5xl font-black mb-2 text-yellow-400">
-                  <CounterNumber target={RATING} duration={2000} />
-                </div>
-                <p className="text-sm text-gray-200">⭐ {REVIEW_COUNT.toLocaleString('pt-BR')}+ avaliações</p>
-              </motion.div>
-            </FadeInUp>
-
-            <FadeInUp delay={0.1}>
-              <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
-                <div className="text-5xl font-black mb-2 text-yellow-400">
-                  <CounterNumber target={TOTAL_CLIENTS} duration={2500} />+
-                </div>
-                <p className="text-sm text-gray-200">Clientes atendidos</p>
-              </motion.div>
-            </FadeInUp>
-
-            <FadeInUp delay={0.2}>
-              <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
-                <div className="text-5xl font-black mb-2 text-yellow-400">
-                  <CounterNumber target={YEARS_EXPERIENCE} duration={1500} />
-                </div>
-                <p className="text-sm text-gray-200">Anos de experiência</p>
-              </motion.div>
-            </FadeInUp>
-
-            <FadeInUp delay={0.3}>
-              <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
-                <div className="text-5xl font-black mb-2 text-yellow-400">2h</div>
-                <p className="text-sm text-gray-200">Resposta garantida</p>
-              </motion.div>
-            </FadeInUp>
+            <div>
+              <div className="text-4xl font-bold mb-2">
+                <CounterNumber target={RATING} duration={2000} />
+              </div>
+              <p className="text-sm">⭐ {REVIEW_COUNT}+ avaliações</p>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2">
+                <CounterNumber target={TOTAL_CLIENTS} duration={2500} />+
+              </div>
+              <p className="text-sm">Clientes atendidos com sucesso</p>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2">
+                <CounterNumber target={YEARS_EXPERIENCE} duration={1500} />
+              </div>
+              <p className="text-sm">Anos de experiência</p>
+            </div>
+            <div>
+              <div className="text-4xl font-bold mb-2">Resposta em 2h</div>
+              <p className="text-sm">Garantido via WhatsApp</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* AUTORIDADE - COM AMARELO/OURO */}
-      <section id="autoridade" className="py-20 bg-white">
+      {/* AUTORIDADE */}
+      <section id="autoridade" className="py-20 bg-gray-50">
         <div className="container max-w-6xl mx-auto px-4">
-          <FadeInUp>
-            <div className="text-center mb-12">
-              <h2 className="text-5xl font-black text-blue-900 mb-4">
-                Por Que Confiar em Mim?
-              </h2>
-              <div className="w-20 h-1 bg-yellow-400 mx-auto"></div>
-            </div>
-          </FadeInUp>
+          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Por Que Confiar em Mim?</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: Award, title: 'Experiência Comprovada', desc: `${YEARS_EXPERIENCE} anos de atuação em perícias e vistorias técnicas`, color: 'from-blue-50 to-blue-100' },
-              { icon: FileText, title: `${TOTAL_REPORTS.toLocaleString('pt-BR')}+ Laudos`, desc: 'Laudos técnicos realizados com precisão e confiabilidade', color: 'from-yellow-50 to-yellow-100' },
-              { icon: Scale, title: 'Perícias Judiciais', desc: 'Atuação em TJSP, TRT-15 e TRF-3 com credibilidade jurídica', color: 'from-blue-50 to-blue-100' },
-              { icon: CheckCircle2, title: `CREA-SP ${CREA_NUMBER}`, desc: 'Registro profissional ativo e regularizado', color: 'from-green-50 to-green-100' },
-            ].map((item, idx) => (
-              <FadeInUp key={idx} delay={idx * 0.1}>
-                <HoverScale>
-                  <Card className={`p-6 border-0 bg-gradient-to-br ${item.color} hover:shadow-xl transition relative overflow-hidden group`}>
-                    {/* Linha amarela no topo ao hover */}
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-yellow-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-                    
-                    <item.icon className="text-blue-900 mb-4 group-hover:text-yellow-500 transition" size={32} />
-                    <h3 className="font-bold text-blue-900 mb-2 text-lg">{item.title}</h3>
-                    <p className="text-gray-600 text-sm">{item.desc}</p>
-                  </Card>
-                </HoverScale>
-              </FadeInUp>
-            ))}
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <Award className="text-blue-900 mb-4" size={32} />
+              <h3 className="font-bold text-blue-900 mb-2 text-lg">Experiência Comprovada</h3>
+              <p className="text-gray-600 text-sm">{YEARS_EXPERIENCE} anos de atuação em perícias e vistorias técnicas</p>
+            </Card>
+
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <FileText className="text-orange-400 mb-4" size={32} />
+              <h3 className="font-bold text-blue-900 mb-2 text-lg">{TOTAL_REPORTS.toLocaleString('pt-BR')}+ Laudos</h3>
+              <p className="text-gray-600 text-sm">Laudos técnicos realizados com precisão e confiabilidade</p>
+            </Card>
+
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <Scale className="text-blue-600 mb-4" size={32} />
+              <h3 className="font-bold text-blue-900 mb-2 text-lg">Perícias Judiciais</h3>
+              <p className="text-gray-600 text-sm">Atuação em TJSP, TRT-15 e TRF-3 com credibilidade jurídica</p>
+            </Card>
+
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <CheckCircle2 className="text-green-600 mb-4" size={32} />
+              <h3 className="font-bold text-blue-900 mb-2 text-lg">CREA-SP {CREA_NUMBER}</h3>
+              <p className="text-gray-600 text-sm">Registro profissional ativo e regularizado</p>
+            </Card>
           </div>
         </div>
       </section>
@@ -254,40 +143,47 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SERVIÇOS - COM AMARELO/OURO */}
-      <section id="servicos" className="py-20 bg-white">
+      {/* SEÇÃO CONTATO */}
+      <section id="contato" className="py-20 bg-white">
         <div className="container max-w-6xl mx-auto px-4">
-          <FadeInUp>
-            <div className="text-center mb-12">
-              <h2 className="text-5xl font-black text-blue-900 mb-4">
-                Serviços Especializados
-              </h2>
-              <div className="w-20 h-1 bg-yellow-400 mx-auto"></div>
-            </div>
-          </FadeInUp>
+          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Serviços Especializados</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: Building2, title: 'Vistoria de Imóvel', desc: 'Laudo detalhado com registro fotográfico completo para locação ou compra', color: 'from-blue-50 to-blue-100', iconColor: 'text-blue-900' },
-              { icon: AlertCircle, title: 'Laudo de Patologias', desc: 'Diagnóstico de infiltração, fissuras, umidade e vícios construtivos', color: 'from-yellow-50 to-yellow-100', iconColor: 'text-yellow-600' },
-              { icon: TrendingUp, title: 'Avaliação de Imóvel', desc: 'Laudo técnico conforme NBR 14653 para fins de mercado', color: 'from-green-50 to-green-100', iconColor: 'text-green-600' },
-              { icon: Zap, title: 'Inspeção Predial', desc: 'Check-up técnico completo conforme NBR 16747', color: 'from-purple-50 to-purple-100', iconColor: 'text-purple-600' },
-              { icon: Scale, title: 'Perícia de Engenharia', desc: 'Laudos técnicos utilizados em processos judiciais', color: 'from-red-50 to-red-100', iconColor: 'text-red-600' },
-              { icon: Briefcase, title: 'Assistência Técnica', desc: 'Suporte pericial para escritórios de advocacia e clientes', color: 'from-indigo-50 to-indigo-100', iconColor: 'text-indigo-600' },
-            ].map((service, idx) => (
-              <FadeInUp key={idx} delay={idx * 0.1}>
-                <HoverScale>
-                  <Card className={`p-6 border-0 bg-gradient-to-br ${service.color} hover:shadow-xl transition relative overflow-hidden group`}>
-                    {/* Linha amarela no topo ao hover */}
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-yellow-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-                    
-                    <service.icon className={`${service.iconColor} mb-4 group-hover:text-yellow-500 transition`} size={28} />
-                    <h3 className="font-bold text-blue-900 mb-3 text-lg">{service.title}</h3>
-                    <p className="text-gray-700 text-sm">{service.desc}</p>
-                  </Card>
-                </HoverScale>
-              </FadeInUp>
-            ))}
+            <Card className="p-6 border-0 bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition">
+              <Building2 className="text-blue-900 mb-4" size={28} />
+              <h3 className="font-bold text-blue-900 mb-3 text-lg">Vistoria de Imóvel</h3>
+              <p className="text-gray-700 text-sm">Laudo detalhado com registro fotográfico completo para locação ou compra</p>
+            </Card>
+
+            <Card className="p-6 border-0 bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition">
+              <AlertCircle className="text-orange-600 mb-4" size={28} />
+              <h3 className="font-bold text-blue-900 mb-3 text-lg">Laudo de Patologias</h3>
+              <p className="text-gray-700 text-sm">Diagnóstico de infiltração, fissuras, umidade e vícios construtivos</p>
+            </Card>
+
+            <Card className="p-6 border-0 bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition">
+              <TrendingUp className="text-green-600 mb-4" size={28} />
+              <h3 className="font-bold text-blue-900 mb-3 text-lg">Avaliação de Imóvel</h3>
+              <p className="text-gray-700 text-sm">Laudo técnico conforme NBR 14653 para fins de mercado</p>
+            </Card>
+
+            <Card className="p-6 border-0 bg-gradient-to-br from-purple-50 to-purple-100 hover:shadow-lg transition">
+              <Zap className="text-purple-600 mb-4" size={28} />
+              <h3 className="font-bold text-blue-900 mb-3 text-lg">Inspeção Predial</h3>
+              <p className="text-gray-700 text-sm">Check-up técnico completo conforme NBR 16747</p>
+            </Card>
+
+            <Card className="p-6 border-0 bg-gradient-to-br from-red-50 to-red-100 hover:shadow-lg transition">
+              <Scale className="text-red-600 mb-4" size={28} />
+              <h3 className="font-bold text-blue-900 mb-3 text-lg">Perícia de Engenharia</h3>
+              <p className="text-gray-700 text-sm">Laudos técnicos utilizados em processos judiciais</p>
+            </Card>
+
+            <Card className="p-6 border-0 bg-gradient-to-br from-indigo-50 to-indigo-100 hover:shadow-lg transition">
+              <Briefcase className="text-indigo-600 mb-4" size={28} />
+              <h3 className="font-bold text-blue-900 mb-3 text-lg">Assistência Técnica</h3>
+              <p className="text-gray-700 text-sm">Suporte pericial para escritórios de advocacia e clientes</p>
+            </Card>
           </div>
         </div>
       </section>
@@ -295,83 +191,268 @@ export default function HomePage() {
       {/* PROBLEMAS QUE RESOLVEMOS */}
       <section id="problemas" className="py-20 bg-gray-50">
         <div className="container max-w-6xl mx-auto px-4">
-          <FadeInUp>
-            <div className="text-center mb-12">
-              <h2 className="text-5xl font-black text-blue-900 mb-4">
-                Problemas Que Resolvemos
-              </h2>
-              <div className="w-20 h-1 bg-yellow-400 mx-auto"></div>
-            </div>
-          </FadeInUp>
+          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Problemas Que Resolvemos</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              { title: 'Conflitos entre Locador e Locatário', desc: 'Laudos que comprovam responsabilidades e danos' },
-              { title: 'Infiltração e Umidade', desc: 'Diagnóstico preciso de origem e responsabilidade' },
-              { title: 'Avaliação para Seguros', desc: 'Laudos aceitos por seguradoras para indenizações' },
-              { title: 'Perícia para Advogados', desc: 'Suporte técnico em processos judiciais' },
-              { title: 'Inspeção Pré-Compra', desc: 'Identificar problemas antes de fechar negócio' },
-              { title: 'Conformidade NBR', desc: 'Laudos que atendem normas técnicas brasileiras' },
-            ].map((item, idx) => (
-              <FadeInUp key={idx} delay={idx * 0.1}>
-                <div className="flex gap-4 p-6 bg-white rounded-lg hover:shadow-lg transition border-l-4 border-yellow-400">
-                  <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={24} />
-                  <div>
-                    <h3 className="font-bold text-blue-900 mb-2 text-lg">{item.title}</h3>
-                    <p className="text-gray-600">{item.desc}</p>
-                  </div>
+            <div className="flex gap-4">
+              <CheckCircle2 className="text-green-600 flex-shrink-0" size={24} />
+              <div>
+                <h3 className="font-bold text-blue-900 mb-2">Conflitos entre Locador e Locatário</h3>
+                <p className="text-gray-600">Laudos que comprovam responsabilidades e danos</p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <CheckCircle2 className="text-green-600 flex-shrink-0" size={24} />
+              <div>
+                <h3 className="font-bold text-blue-900 mb-2">Problemas de Infiltração ou Fissuras</h3>
+                <p className="text-gray-600">Diagnóstico preciso da origem e solução</p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <CheckCircle2 className="text-green-600 flex-shrink-0" size={24} />
+              <div>
+                <h3 className="font-bold text-blue-900 mb-2">Danos Estruturais</h3>
+                <p className="text-gray-600">Avaliação técnica e recomendações de reparo</p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <CheckCircle2 className="text-green-600 flex-shrink-0" size={24} />
+              <div>
+                <h3 className="font-bold text-blue-900 mb-2">Disputas Judiciais</h3>
+                <p className="text-gray-600">Laudos com validade jurídica comprovada</p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <CheckCircle2 className="text-green-600 flex-shrink-0" size={24} />
+              <div>
+                <h3 className="font-bold text-blue-900 mb-2">Avaliação de Valor de Mercado</h3>
+                <p className="text-gray-600">Laudos conforme normas técnicas brasileiras</p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <CheckCircle2 className="text-green-600 flex-shrink-0" size={24} />
+              <div>
+                <h3 className="font-bold text-blue-900 mb-2">Assistência Técnica Pericial</h3>
+                <p className="text-gray-600">Suporte completo para processos judiciais</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ASSISTÊNCIA TÉCNICA PARA ADVOGADOS */}
+      <section id="assistencia" className="py-20 bg-blue-50">
+        <div className="container max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Assistência Técnica para Advogados</h2>
+
+          <div className="bg-white rounded-lg p-8 border-l-4 border-orange-400">
+            <p className="text-gray-700 mb-6 text-lg leading-relaxed">
+              Ofereço assistência técnica pericial especializada para escritórios de advocacia, incluindo:
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex gap-3">
+                <FileText className="text-orange-400 flex-shrink-0" size={20} />
+                <div>
+                  <h4 className="font-bold text-blue-900 mb-1">Formulação de Quesitos</h4>
+                  <p className="text-gray-600 text-sm">Orientação técnica para quesitos pertinentes</p>
                 </div>
-              </FadeInUp>
-            ))}
+              </div>
+
+              <div className="flex gap-3">
+                <FileText className="text-orange-400 flex-shrink-0" size={20} />
+                <div>
+                  <h4 className="font-bold text-blue-900 mb-1">Parecer Técnico</h4>
+                  <p className="text-gray-600 text-sm">Análise técnica fundamentada para processos</p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <Users className="text-orange-400 flex-shrink-0" size={20} />
+                <div>
+                  <h4 className="font-bold text-blue-900 mb-1">Acompanhamento Judicial</h4>
+                  <p className="text-gray-600 text-sm">Suporte durante todo o processo pericial</p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <AlertCircle className="text-orange-400 flex-shrink-0" size={20} />
+                <div>
+                  <h4 className="font-bold text-blue-900 mb-1">Impugnação de Laudos</h4>
+                  <p className="text-gray-600 text-sm">Análise crítica de laudos da parte contrária</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SOBRE */}
+      <section id="sobre" className="py-20 bg-[#0D3B66]">
+        <div className="container max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-white mb-12 text-center">Sobre o Engenheiro</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Foto */}
+            <div className="flex justify-center order-2 md:order-1">
+              <img 
+                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663057289090/FfhZ2VxW9RDUmNFz5qwBY3/Gemini_Generated_Image_u4c3x6u4c3x6u4c3_5c3766c9.webp"
+                alt="Eng. Gustavo Freitas"
+                className="rounded-lg shadow-2xl w-full max-w-md hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+
+            {/* Texto */}
+            <div className="order-1 md:order-2">
+              <h3 className="text-2xl font-bold text-white mb-6">{PROFESSIONAL_NAME}</h3>
+              <p className="text-gray-100 mb-4 leading-relaxed">
+                Engenheiro Civil e Engenheiro de Segurança do Trabalho com {YEARS_EXPERIENCE} anos de experiência em engenharia diagnóstica, perícias técnicas e elaboração de laudos especializados.
+              </p>
+              <p className="text-gray-100 mb-4 leading-relaxed">
+                Realizado mais de {TOTAL_REPORTS.toLocaleString('pt-BR')} laudos técnicos com precisão e confiabilidade, atuando em perícias judiciais e extrajudiciais nos tribunais TJSP, TRT-15 e TRF-3.
+              </p>
+              <p className="text-gray-100 leading-relaxed mb-6">
+                Especialista em diagnóstico de patologias construtivas, avaliação de imóveis conforme NBR 14653, inspeção predial conforme NBR 16747 e assistência técnica pericial para processos judiciais.
+              </p>
+              
+              <button className="bg-[#F59E0B] hover:bg-[#E59E0B] text-white px-8 py-3 rounded-lg font-bold transition-colors">
+                Falar no WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CREDENCIAIS */}
+      <section className="py-20 bg-white">
+        <div className="container max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-[#0D3B66] mb-12 text-center">Credenciais Profissionais</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Card className="p-8 border-0 bg-gradient-to-br from-blue-50 to-blue-100">
+              <h3 className="text-xl font-bold text-[#0D3B66] mb-6">Qualificações</h3>
+
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-gray-600">Profissão</p>
+                  <p className="font-bold text-[#0D3B66]">Engenheiro Civil e de Segurança do Trabalho</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-600">CREA-SP</p>
+                  <p className="font-bold text-[#0D3B66]">{CREA_NUMBER}</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-600">Experiência</p>
+                  <p className="font-bold text-[#0D3B66]">{YEARS_EXPERIENCE} anos</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-600">Laudos Realizados</p>
+                  <p className="font-bold text-[#0D3B66]">{TOTAL_REPORTS.toLocaleString('pt-BR')}+</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-600">Atuação Geográfica</p>
+                  <p className="font-bold text-[#0D3B66]">{REGION}</p>
+                </div>
+
+                <div>
+                  <p className="text-sm text-gray-600">Avaliação</p>
+                  <p className="font-bold text-[#0D3B66]">⭐ {RATING} ({REVIEW_COUNT}+ avaliações)</p>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* CALCULADORA DE PREÇOS */}
-      <section id="calculadora-preco" className="py-20 bg-white">
-        <div className="container max-w-6xl mx-auto px-4">
-          <FadeInUp>
-            <div className="text-center mb-12">
-              <h2 className="text-5xl font-black text-blue-900 mb-4">
-                Calculadora de Preços
-              </h2>
-              <div className="w-20 h-1 bg-yellow-400 mx-auto"></div>
-            </div>
-          </FadeInUp>
+      <section className="py-20 bg-gray-50">
+        <div className="container max-w-4xl mx-auto px-4">
           <PriceCalculator />
         </div>
       </section>
 
       {/* AGENDAMENTO CALENDLY */}
-      <section id="calendly" className="py-20 bg-gradient-to-br from-blue-900 to-blue-800 text-white">
-        <div className="container max-w-6xl mx-auto px-4">
-          <FadeInUp>
-            <div className="text-center mb-12">
-              <h2 className="text-5xl font-black mb-4">
-                Agende Sua Vistoria
-              </h2>
-              <p className="text-xl text-gray-200 max-w-2xl mx-auto">
-                Escolha o melhor horário para você. Resposta garantida em até 2 horas.
-              </p>
-            </div>
-          </FadeInUp>
+      <section id="calendly" className="py-20 bg-white">
+        <div className="container max-w-4xl mx-auto px-4">
           <CalendlyWidget />
         </div>
       </section>
 
-      {/* FORMULÁRIO DE CONTATO */}
-      <section id="contato" className="py-20 bg-white">
+      {/* FORMULÁRIO DE LEAD */}
+      <section id="contato" className="py-20 bg-gradient-to-br from-slate-50 to-slate-100">
+        <div className="container max-w-4xl mx-auto px-4">
+          <LeadForm />
+        </div>
+      </section>
+
+      {/* INFORMAÇÕES DE CONTATO */}
+      <section className="py-20 bg-white">
         <div className="container max-w-6xl mx-auto px-4">
-          <FadeInUp>
-            <div className="text-center mb-12">
-              <h2 className="text-5xl font-black text-blue-900 mb-4">
-                Entre em Contato
-              </h2>
-              <div className="w-20 h-1 bg-yellow-400 mx-auto"></div>
-            </div>
-          </FadeInUp>
-          <div className="max-w-2xl mx-auto">
-            <LeadForm />
+          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Outras Formas de Contato</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <Card className="p-6 text-center border-0 bg-gradient-to-br from-green-50 to-green-100 hover:shadow-lg transition">
+              <MessageCircle className="w-12 h-12 text-green-600 mx-auto mb-4" />
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">WhatsApp</h4>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 font-bold text-lg">{PHONE_DISPLAY}</a>
+              <p className="text-xs text-gray-600 mt-2">Resposta em até 2 horas</p>
+            </Card>
+
+            <Card className="p-6 text-center border-0 bg-gradient-to-br from-blue-50 to-blue-100 hover:shadow-lg transition">
+              <Award className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">CREA-SP</h4>
+              <p className="text-blue-600 font-bold text-lg">{CREA_NUMBER}</p>
+              <p className="text-xs text-gray-600 mt-2">Registro profissional</p>
+            </Card>
+
+            <Card className="p-6 text-center border-0 bg-gradient-to-br from-orange-50 to-orange-100 hover:shadow-lg transition">
+              <Briefcase className="w-12 h-12 text-orange-600 mx-auto mb-4" />
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">Experiência</h4>
+              <p className="text-orange-600 font-bold text-lg">{YEARS_EXPERIENCE} Anos</p>
+              <p className="text-xs text-gray-600 mt-2">{TOTAL_REPORTS.toLocaleString('pt-BR')}+ laudos</p>
+            </Card>
+
+            <Card className="p-6 text-center border-0 bg-gradient-to-br from-purple-50 to-purple-100 hover:shadow-lg transition">
+              <Building2 className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">Localização</h4>
+              <p className="text-purple-600 font-bold text-lg">Campinas, SP</p>
+              <p className="text-xs text-gray-600 mt-2">Região de Campinas</p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* BLOG */}
+      <section id="blog" className="py-20 bg-gray-50">
+        <div className="container max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl font-bold text-blue-900 mb-12 text-center">Blog Técnico</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <h3 className="font-bold text-lg text-blue-900 mb-3">Como Identificar Infiltração em Imóveis</h3>
+              <p className="text-gray-600 mb-4 text-sm">Guia técnico sobre os principais sinais de infiltração e como diagnosticar problemas de umidade em construções.</p>
+              <a href="#" className="text-orange-400 font-bold hover:text-orange-500">Leia mais →</a>
+            </Card>
+
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <h3 className="font-bold text-lg text-blue-900 mb-3">NBR 14653: Avaliação de Imóveis</h3>
+              <p className="text-gray-600 mb-4 text-sm">Entenda a norma técnica brasileira para avaliação de propriedades e como ela garante precisão nos laudos.</p>
+              <a href="#" className="text-orange-400 font-bold hover:text-orange-500">Leia mais →</a>
+            </Card>
+
+            <Card className="p-6 border-0 bg-white hover:shadow-lg transition">
+              <h3 className="font-bold text-lg text-blue-900 mb-3">Perícia Judicial: O Papel do Engenheiro</h3>
+              <p className="text-gray-600 mb-4 text-sm">Saiba como a perícia técnica é fundamental em processos judiciais e como o engenheiro contribui para a decisão.</p>
+              <a href="#" className="text-orange-400 font-bold hover:text-orange-500">Leia mais →</a>
+            </Card>
           </div>
         </div>
       </section>
@@ -379,21 +460,37 @@ export default function HomePage() {
       {/* FOOTER */}
       <footer className="bg-blue-900 text-white py-12">
         <div className="container max-w-6xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-bold text-lg mb-4 text-yellow-400">{PROFESSIONAL_NAME}</h3>
-              <p className="text-gray-300 text-sm">Engenheiro civil especializado em perícias técnicas, vistorias imobiliárias e laudos técnicos.</p>
+              <h4 className="font-bold mb-4">{PROFESSIONAL_NAME}</h4>
+              <p className="text-gray-300 text-sm">Especialista em perícias de engenharia e vistorias técnicas de imóveis em Campinas e região.</p>
             </div>
+
             <div>
-              <h3 className="font-bold text-lg mb-4 text-yellow-400">Contato</h3>
-              <p className="text-gray-300 text-sm mb-2">📞 {PHONE_DISPLAY}</p>
-              <p className="text-gray-300 text-sm mb-2">📧 contato@gfengenhariaepericias.com.br</p>
-              <p className="text-gray-300 text-sm">📍 Campinas, SP</p>
+              <h4 className="font-bold mb-4">Serviços</h4>
+              <ul className="space-y-2 text-sm text-gray-300">
+                <li><a href="#servicos" className="hover:text-white">Vistoria de Imóvel</a></li>
+                <li><a href="#servicos" className="hover:text-white">Laudo Técnico</a></li>
+                <li><a href="#servicos" className="hover:text-white">Perícia Judicial</a></li>
+                <li><a href="#servicos" className="hover:text-white">Avaliação de Imóvel</a></li>
+              </ul>
             </div>
+
             <div>
-              <h3 className="font-bold text-lg mb-4 text-yellow-400">Registro Profissional</h3>
-              <p className="text-gray-300 text-sm">CREA-SP {CREA_NUMBER}</p>
-              <p className="text-gray-300 text-sm mt-4">Resposta garantida em 2 horas via WhatsApp</p>
+              <h4 className="font-bold mb-4">Links Rápidos</h4>
+              <ul className="space-y-2 text-sm text-gray-300">
+                <li><a href="#inicio" className="hover:text-white">Início</a></li>
+                <li><a href="#servicos" className="hover:text-white">Serviços</a></li>
+                <li><a href="#sobre" className="hover:text-white">Sobre</a></li>
+                <li><a href="#contato" className="hover:text-white">Contato</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-bold mb-4">Contato</h4>
+              <p className="text-sm text-gray-300 mb-2">WhatsApp: {PHONE_DISPLAY}</p>
+              <p className="text-sm text-gray-300 mb-2">CREA-SP: {CREA_NUMBER}</p>
+              <p className="text-sm text-gray-300">Campinas, SP</p>
             </div>
           </div>
 

@@ -43,11 +43,9 @@
 }
 
 :root {
-  /* Cores Corporativas - Documento GF Engenharia + Design Moderno Arena */
+  /* Cores Corporativas - Documento GF Engenharia */
   --primary: #0D3B66; /* Azul Marinho (do documento) */
   --primary-foreground: #FFFFFF;
-  --accent: #FFC107; /* Amarelo/Ouro Moderno (NOVO!) */
-  --accent-foreground: #0D3B66;
   --sidebar-primary: #0D3B66;
   --sidebar-primary-foreground: #FFFFFF;
   --chart-1: #3B82F6;
